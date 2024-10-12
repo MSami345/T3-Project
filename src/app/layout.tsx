@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { Toaster } from "~/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -14,7 +15,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className=" bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">{children}</body>
+      <body className=" bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+        <>
+          {children}
+          <Toaster />
+        </>
+      </body>
     </html>
   );
 }

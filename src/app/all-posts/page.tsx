@@ -9,7 +9,7 @@ const page = async () => {
     const posts = await getPost();
 
     return (
-        <div className='flex flex-col items-center gap-10 py-10'>
+        <div className='flex flex-col min-h-screen items-center gap-10 py-10'>
             <p className="text-2xl font-bold shadow-lg p-3">POSTS From vercel postgres</p>
             {posts?.length ?
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10'>

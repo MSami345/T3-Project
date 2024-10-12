@@ -2,10 +2,12 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { type FormEvent } from 'react'
+import { useToast } from '~/hooks/use-toast'
 
 const PostForm = () => {
     const [name, setName] = useState('')
     const router = useRouter()
+    const { toast } = useToast()
 
     const addPost = async (e: FormEvent) => {
         e.preventDefault()
@@ -16,9 +18,13 @@ const PostForm = () => {
                 headers: { 'content-type': 'application/json' }
             })
             if (res.ok) {
-                // router.refresh()
+
                 router.replace('/all-posts')
                 router.refresh()
+                toast({
+                    title: "Post Added successfully"
+                })
+
             }
         } catch (error) {
             console.log(error)
@@ -29,6 +35,7 @@ const PostForm = () => {
     return (
         <div className='flex flex-col gap-4 h-screen items-center justify-center shadow-lg p-5 rounded-lg'>
             <p className='text-xl font-bold py-5'>Create a new Post</p>
+           
             <form onSubmit={addPost} className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="Name" className="text-md font-semibold">

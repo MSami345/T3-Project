@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useToast } from '~/hooks/use-toast'
 interface POST {
     id: number
     name: string | null
@@ -10,6 +11,7 @@ interface POST {
 
 const PostDisplay = ({ post }: { post: POST }) => {
     const router = useRouter();
+    const { toast } = useToast()
     const deletePost = async (id: number) => {
         try {
             await fetch(`/api/post?id=${id}`, { method: "DELETE" })
@@ -31,6 +33,9 @@ const PostDisplay = ({ post }: { post: POST }) => {
                 onClick={() => {
                     deletePost(Number(post.id)).then(() => {
                         router.refresh()
+                        toast({
+                            title: "Post deleted successfully"
+                        })
                     })
                         .catch(error => console.log(error))
                 }}
