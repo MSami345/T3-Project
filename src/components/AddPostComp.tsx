@@ -1,30 +1,15 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-// import { addPost } from './addpost';
+import { useRouter } from 'next/navigation';
+import React from 'react'
 
 const AddPostComp = () => {
-    const [flag, setFlag] = useState(false);
-
-    const addPost = async () => {
-        try {
-            await fetch('/api/post')
-            // alert("post added successfully")
-        } catch (error) {
-            console.log(error)
-            alert("error adding posts in database")
-        }
-    }
-
-    useEffect(() => {
-        if (flag) {
-            addPost().catch(error=>console.log(error))
-        }
-    }, [flag])
-
+    const router = useRouter()
 
     return (
         <div>
-            <button onClick={() => setFlag(!flag)}>{flag ? 'created' : 'create'}</button>
+            <button className='bg-blue-400 text-white p-3 rounded-xl' onClick={() => router.push('/create-post')}>
+                Add Post
+            </button>
         </div>
     )
 }

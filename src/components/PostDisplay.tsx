@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 interface POST {
     id: number
@@ -8,6 +9,7 @@ interface POST {
 }
 
 const PostDisplay = ({ post }: { post: POST }) => {
+    const router = useRouter();
     const deletePost = async (id: number) => {
         try {
             await fetch(`/api/post?id=${id}`, { method: "DELETE" })
@@ -27,7 +29,10 @@ const PostDisplay = ({ post }: { post: POST }) => {
             <button
                 className='bg-red-700 text-white p-2 rounded-lg'
                 onClick={() => {
-                    deletePost(Number(post.id)).catch(error => console.log(error))
+                    deletePost(Number(post.id)).then(() => {
+                        router.refresh()
+                    })
+                        .catch(error => console.log(error))
                 }}
             >
                 Delete Post
