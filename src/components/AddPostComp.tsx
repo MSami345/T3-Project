@@ -1,14 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { db } from '~/server/db';
-import { posts } from '~/server/db/schema';
+// import { addPost } from './addpost';
 
 const AddPostComp = () => {
     const [flag, setFlag] = useState(false);
 
     const addPost = async () => {
         try {
-            await db.insert(posts).values({ name: 'saad' })
+            await fetch('/api/post')
+            // alert("post added successfully")
         } catch (error) {
             console.log(error)
             alert("error adding posts in database")
@@ -17,12 +17,13 @@ const AddPostComp = () => {
 
     useEffect(() => {
         if (flag) {
-            addPost().catch(err => console.log("error adding post"))
+            addPost()
         }
     }, [flag])
+
+
     return (
         <div>
-
             <button onClick={() => setFlag(!flag)}>{flag ? 'created' : 'create'}</button>
         </div>
     )
