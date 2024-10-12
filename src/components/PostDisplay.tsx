@@ -24,7 +24,14 @@ const PostDisplay = ({ post }: { post: POST }) => {
                 <br />
                 <span>created At : <strong>{post.createdAt.toDateString()}</strong></span>
             </p>
-            <button className='bg-red-700 text-white p-2 rounded-lg' onClick={() => { deletePost(Number(post.id)) }}>Delete Post</button>
+            <button
+                className='bg-red-700 text-white p-2 rounded-lg'
+                onClick={() => {
+                    deletePost(Number(post.id)).catch(error => console.log(error))
+                }}
+            >
+                Delete Post
+            </button>
         </div>
     )
 }
