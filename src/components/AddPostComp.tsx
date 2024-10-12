@@ -17,7 +17,7 @@ const AddPostComp = () => {
 
     useEffect(() => {
         if (flag) {
-            addPost()
+            addPost().catch(err => console.log("error adding post"))
         }
     }, [flag])
     return (
