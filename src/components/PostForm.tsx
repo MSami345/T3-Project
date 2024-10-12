@@ -16,7 +16,9 @@ const PostForm = () => {
                 headers: { 'content-type': 'application/json' }
             })
             if (res.ok) {
-                router.push('/all-posts')
+                // router.refresh()
+                router.replace('/all-posts')
+                router.refresh()
             }
         } catch (error) {
             console.log(error)

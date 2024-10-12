@@ -3,7 +3,7 @@ import AddPostComp from '~/components/AddPostComp'
 import PostDisplay from '~/components/PostDisplay'
 import { getPost } from '~/server/queries'
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic';
 
 const page = async () => {
     const posts = await getPost();
