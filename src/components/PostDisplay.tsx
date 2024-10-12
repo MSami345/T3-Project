@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useToast } from '~/hooks/use-toast'
+import { postDelete } from '~/server/queries'
 interface POST {
     id: number
     name: string | null
@@ -24,11 +25,18 @@ const PostDisplay = ({ post }: { post: POST }) => {
         <div className='flex flex-col gap-2 p-5 shadow-xl rounded-lg text-base'>
 
             <p className='font-normal'>
-                name : <strong>{post.name}</strong>
+                <strong className='pr-4'> {post.id}:</strong>
+                <strong>{post.name}</strong>
                 <br />
                 <span>created At : <strong>{post.createdAt.toDateString()}</strong></span>
             </p>
+            {/* <form action={async () => {
+                'use server'
+                // console.log(post.id)
+                await postDelete(post.id).then(() => { toast({ title: "post deleted successfully" }) }).catch(error => console.error(error))
+            }}> */}
             <button
+                type='submit'
                 className='bg-red-700 text-white p-2 rounded-lg'
                 onClick={() => {
                     deletePost(Number(post.id)).then(() => {
@@ -42,6 +50,7 @@ const PostDisplay = ({ post }: { post: POST }) => {
             >
                 Delete Post
             </button>
+            {/* </form> */}
         </div>
     )
 }
